@@ -4,6 +4,7 @@ import time
 
 # captures video from webcam
 # NOTE: input value can vary between -1, 0, 1, 2 (differs per device, 0 or 1 is common)
+# WARNING: VideoCapture does not work if another application is using camera (ie. video calling)
 cap = cv2.VideoCapture(0)
 
 # from pre-trained Mediapipe to draw hand landmarks and connections
