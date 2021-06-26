@@ -2,6 +2,8 @@ import cv2
 import mediapipe as mp
 import time
 
+from SignLanguageLookup import *
+
 # captures video from webcam
 # NOTE: input value can vary between -1, 0, 1, 2 (differs per device, 0 or 1 is common)
 # WARNING: VideoCapture does not work if another application is using camera (ie. video calling)
@@ -30,6 +32,9 @@ while True:
 
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
+            # creates list of all landmarks for easier indexing
+            # list will have 21 values -> lm_list[0] will be first landmark
+            lm_list = []
 
             # id corresponds to landmark #
             #   -> 21 landmarks in total (4 on non-thumb fingers, rest on thumb and palm)
@@ -41,12 +46,22 @@ while True:
             for id, lm in enumerate(handLms.landmark):
                 h, w, c = img.shape                 # get height, width, depth or color(?)
                 cx, cy = int(lm.x*w), int(lm.y*h)   # convert to x and y pixel values
-                print("ID", id, ":", cx, cy)
+                #print("ID", id, ":", cx, cy)
 
                 # code to draw bigger circle on specific landmark
                 # if id == 4:
                 #    cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
+                lm_list.append([id, cx, cy])
+
+            # to check if finger is closed, check y position of finger
+            # if y position of tip is less than y position of join (2 values lower), finger is closed
+            # NOTE: does not work for thumb, instead, check x position of thumb, if it's left of
+            if (lm_list[8][2] < lm_list[6][2]):
+                print("Index finger open")
+            else:
+                print("Index finger closed")
+            #print(lm_list)
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS) # draw hand landmarks and connections
 
     # print FPS on screen (not console)
@@ -63,6 +78,7 @@ while True:
     if key == ord("q"):
         break
 
+test()
 # cleanup
 cap.release()
 cv2.destroyAllWindows()
