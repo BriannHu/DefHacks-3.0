@@ -1,9 +1,13 @@
 
-tip_ids=[4,8,12,16,20]
-finger_lms = [[5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16], [17, 18, 19, 20]]
+tip_ids = [4, 8, 12, 16, 20]
+finger_lms = [[5, 6, 7, 8], [9, 10, 11, 12],
+              [13, 14, 15, 16], [17, 18, 19, 20]]
 
-VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
-HORIZONTAL_ERROR_MARGIN = 5 # FOR THUMB - less horizontal space than vertical so needs to have smaller margin
+# FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
+VERTICAL_ERROR_MARGIN = 10
+# FOR THUMB - less horizontal space than vertical so needs to have smaller margin
+HORIZONTAL_ERROR_MARGIN = 5
+
 
 def createOutputList(lm_list):
     a = analyseThumb(lm_list)
@@ -14,6 +18,8 @@ def createOutputList(lm_list):
     return [a, b, c, d, e]
 
 # check position of tip of thumb relative to other base finger LMs (ie. 5, 9, 13)
+
+
 def analyseThumb(lm_list):
     THUMB_TIP = lm_list[4]
     INDEX_BASE = lm_list[5]
@@ -29,6 +35,8 @@ def analyseThumb(lm_list):
     return 3
 
 # check position of tip of index finger relative to other LMs
+
+
 def analyseIndexFinger(lm_list):
     INDEX_FINGER_TIP = lm_list[8]
     INDEX_FINGER_DIP = lm_list[7]
@@ -44,6 +52,8 @@ def analyseIndexFinger(lm_list):
     return 3
 
 # check position of tip of middle finger relative to other LMs
+
+
 def analyseMiddleFinger(lm_list):
     MIDDLE_FINGER_TIP = lm_list[12]
     MIDDLE_FINGER_DIP = lm_list[11]
@@ -59,6 +69,8 @@ def analyseMiddleFinger(lm_list):
     return 3
 
 # check position of tip of ring finger relative to other LMs
+
+
 def analyseRingFinger(lm_list):
     RING_FINGER_TIP = lm_list[16]
     RING_FINGER_DIP = lm_list[15]
@@ -74,6 +86,8 @@ def analyseRingFinger(lm_list):
     return 3
 
 # check position of tip of pinky relative to other LMs
+
+
 def analysePinkyFinger(lm_list):
     PINKY_FINGER_TIP = lm_list[20]
     PINKY_FINGER_DIP = lm_list[19]
@@ -132,4 +146,63 @@ CONVERSION_LOOKUP = {
 
 }
 
+# def points(self, x, y, z):
 
+# def finger(self, points):
+# self.points[4]
+
+
+# def fingerClosed:
+# for x in 4:
+# if fing[x].y (within range of) index[x+1].y
+# Then fingerclosed = true
+
+
+# finding c
+# if index.x && index.y within range of pinky.x && pinky.y
+
+# index[4] storing 4 landmarks of the index
+# pinky[4] storing 4 landmarks of the index
+
+
+# for x in 4:
+#    if (pinky[x] > [index[x] +20] && if pinky[x] < [index[x]] + 30)
+#   return
+
+# Reference for c valeus
+
+
+# thumb
+
+# ID 1 : -0.054008327424526215
+# ID 2 : -0.08915983885526657
+# ID 3 : -0.1106901615858078
+# ID 4 : -0.13401658833026886
+
+# index
+
+# ID 5 : -0.09317348152399063
+# ID 6 : -0.1340368390083313
+# ID 7 : -0.16393175721168518
+# ID 8 : -0.18637309968471527
+
+# third
+
+# ID 9 : -0.07456375658512115
+# ID 10 : -0.11399233341217041
+# ID 11 : -0.14275501668453217
+# ID 12 : -0.163238525390625
+
+# ring
+
+# ID 13 : -0.005223339889198542
+# ID 14 : -0.027664903551340103
+# ID 15 : -0.04998425021767616
+# ID 16 : -0.06748953461647034
+
+# pinky
+
+# ID 17 : -0.05205222964286804
+# ID 18 : -0.07689081877470016
+# ID 19 : -0.09152737259864807
+# ID 20 : -0.10459191352128983
