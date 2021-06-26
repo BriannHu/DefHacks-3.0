@@ -54,14 +54,11 @@ while True:
 
                 lm_list.append([id, cx, cy])
 
-            # to check if finger is closed, check y position of finger
-            # if y position of tip is less than y position of join (2 values lower), finger is closed
-            # NOTE: does not work for thumb, instead, check x position of thumb, if it's left of
-            if (lm_list[8][2] < lm_list[6][2]):
-                print("Index finger open")
-            else:
-                print("Index finger closed")
-            #print(lm_list)
+            OUTPUT_LIST = createOutputList(lm_list)
+            print(OUTPUT_LIST)
+            if tuple(OUTPUT_LIST) in CONVERSION_LOOKUP:
+                cv2.putText(img, CONVERSION_LOOKUP[tuple(OUTPUT_LIST)], (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+                            3)
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS) # draw hand landmarks and connections
 
     # print FPS on screen (not console)
