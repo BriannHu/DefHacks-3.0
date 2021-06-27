@@ -31,30 +31,43 @@ pinky = finger()
 
 def checkSign():
     # Loop through 4
-    for num in range(5):
-        if num < 1:
+    isC = True
+    isU = True
+    isV = True
+    for num in range(1, 5):
 
-            # Checking for letter c
-            isC = True
-            isU = True
-
-            num = 1
-            if((abs(thumb.point[num].x-pinky.point[num].x) < 0.05) and (abs(thumb.point[num].y-pinky.point[num].y) < 0.3)
-               and (abs(thumb.point[num].y-pinky.point[num].y) > 0.2)):
-                print("This is a c")
+        if((abs(thumb.point[num].x-pinky.point[num].x) > 0.07) or (abs(thumb.point[num].y-pinky.point[num].y) > 0.3)
+                or (abs(thumb.point[num].y-pinky.point[num].y) < 0.2)):
+            isC = False
 
             # Checking for U
-            elif((abs(index.point[num].x-middle.point[num].x) < 0.07) and abs(index.point[num].x-middle.point[num].x) > 0.001
-                    and (abs(index.point[num].y-middle.point[num].y) < 0.07)
-                    and (abs(index.point[num].y-middle.point[num].y) > 0.005) and abs(index.point[num].z-middle.point[num].z)
-                    < 0.03 and abs(index.point[3].y-ring.point[3].y) > 0.1):
-                print("This is a U")
+        if((abs(index.point[num].x-middle.point[num].x) > 0.06) or abs(index.point[num].x-middle.point[num].x) < 0.02
+            or (abs(index.point[num].y-middle.point[num].y) > 0.03)
+            or (abs(index.point[num].y-middle.point[num].y) < 0.003) or
+           (abs(index.point[4].y-ring.point[4].y) < 0.1) or (abs(index.point[4].x-middle.point[4].x)) > 0.05):
+            isU = False
+
+            # Checking for V
+        if((abs(index.point[num].y-middle.point[num].y) > 0.06) or
+           (abs(index.point[4].y-ring.point[4].y) < 0.1) or (abs(index.point[4].x-middle.point[4].x)) < 0.05):
+            isV = False
 
             # Checking for V
             # if((abs(thumb.point[num].x-pinky.point[num].x) < 0.05) and (abs(thumb.point[num].y-pinky.point[num].y) < 0.3)
             #    and (abs(thumb.point[num].y-pinky.point[num].y) > 0.2)):
             #     print("This is a V")
-
+    if (isC):
+        # print("Letter C")
+        cv2.putText(img, "C", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+                    3)
+    elif (isU):
+        # print("Letter U")
+        cv2.putText(img, "U", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+                    3)
+    elif (isV):
+        # print("Letter V")
+        cv2.putText(img, "V", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+                    3)
     # Detects
 
 
